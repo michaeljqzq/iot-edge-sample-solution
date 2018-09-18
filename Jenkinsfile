@@ -13,6 +13,9 @@ node {
   }
 
   withEnv(['DEVOPS_IOTEDGE_REGISTRY_URL=zhiqing.azurecr.io']) {
+    stage('test') {
+      sh "printenv"
+    }
     stage('Build') {
       azureIoTEdgePush dockerRegistryType: 'acr', acrName: 'zhiqing', bypassModules: '', azureCredentialsId: 'azuresp', resourceGroup: 'iotedge-jenkins-automation-test', rootPath: './'
     }
