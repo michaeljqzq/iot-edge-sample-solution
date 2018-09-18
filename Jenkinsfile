@@ -12,8 +12,10 @@ node {
     checkout scm
   }
 
-  stage('Build') {
-    azureIoTEdgePush dockerRegistryType: 'acr', acrName: 'zhiqing', bypassModules: '', azureCredentialsId: 'azuresp', resourceGroup: 'iotedge-jenkins-automation-test', rootPath: './'
+  withEnv(['DEVOPS_IOTEDGE_REGISTRY_URL=zhiqing.azurecr.io']) {
+    stage('Build') {
+      azureIoTEdgePush dockerRegistryType: 'acr', acrName: 'zhiqing', bypassModules: '', azureCredentialsId: 'azuresp', resourceGroup: 'iotedge-jenkins-automation-test', rootPath: './'
+    }
   }
 
   stage('Deploy') {
